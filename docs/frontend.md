@@ -122,19 +122,14 @@ import 'react-mde/lib/styles/css/react-mde-all.css';
 
 ### TypeScript
 
-**TypeScript 5.9.3** - Full TypeScript implementation with strict type checking:
+**TypeScript 5.9.3** - Full TypeScript implementation with strict type checking.
 
-```json
-{
-  "compilerOptions": {
-    "strict": true,
-    "jsx": "react-jsx",
-    "target": "es5",
-    "module": "esnext",
-    "moduleResolution": "node"
-  }
-}
-```
+Key configuration options (`tsconfig.json`):
+- Strict mode enabled
+- JSX: `react-jsx` (React 17+ transform)
+- Target: ES5 for broad compatibility
+- Module system: ESNext with Node resolution
+- Path aliases for `@components/*` and `src/*`
 
 ### State Management & Data Fetching
 
@@ -275,27 +270,12 @@ Alternative form libraries:
 - Native ES modules in development
 - Plugin ecosystem
 
-**Vite Configuration (`vite.config.mts`):**
-```typescript
-{
-  build: {
-    target: ['chrome58']
-  },
-  resolve: {
-    alias: {
-      '@components': './src/private/components',
-      'src': './src'
-    }
-  },
-  server: {
-    port: 3000,
-    proxy: {
-      '/graphql': 'http://localhost:4000',
-      // ... other API proxies
-    }
-  }
-}
-```
+**Vite Configuration (`vite.config.mts`)** includes:
+- **Build target**: Chrome 58+ for production
+- **Path aliases**: `@components` → `./src/private/components`, `src` → `./src`
+- **Dev server**: Port 3000 with proxy to backend (localhost:4000) for GraphQL and other API endpoints
+- **Dependency optimization**: Pre-optimizes 170+ dependencies to avoid reload on lazy routes
+- **Plugins**: React, Relay compiler, static file copying, and custom HTML transformation
 
 ### Vite Plugins
 
@@ -344,41 +324,24 @@ Alternative form libraries:
 
 ### Entry Point
 
-**src/front.tsx** - Application entry point:
-```typescript
-import { createRoot } from 'react-dom/client';
-import { RelayEnvironmentProvider } from 'react-relay/hooks';
-import App from './app';
-import { environment } from './relay/environment';
-
-const root = createRoot(document.getElementById('root'));
-root.render(
-  <RelayEnvironmentProvider environment={environment}>
-    <Suspense fallback={<Loading />}>
-      <App />
-    </Suspense>
-  </RelayEnvironmentProvider>
-);
-```
+**src/front.tsx** - Application entry point that:
+- Imports fonts (IBM Plex Sans, Geologica) and CSS files
+- Creates React root from `#root` div
+- Wraps app in `RelayEnvironmentProvider` for GraphQL state
+- Uses React Suspense for lazy loading with custom loading component
+- Renders main `<App />` component
 
 ### Application Structure
 
-**src/app.tsx** - Main application component:
-```typescript
-<CookiesProvider>
-  <BrowserRouter basename={APP_BASE_PATH}>
-    <AuthBoundaryComponent>
-      <RedirectManager>
-        <Routes>
-          <Route path="/dashboard/*" Component={PrivateRoot} />
-          <Route path="/public/*" Component={PublicRoot} />
-          <Route path="/*" element={<Navigate to="/dashboard" />} />
-        </Routes>
-      </RedirectManager>
-    </AuthBoundaryComponent>
-  </BrowserRouter>
-</CookiesProvider>
-```
+**src/app.tsx** - Main application component structure:
+- Wrapped in `CookiesProvider` for cookie management
+- Uses `BrowserRouter` with configurable base path
+- Protected by `AuthBoundaryComponent` for authentication
+- `RedirectManager` handles navigation redirects
+- Three main routes:
+  - `/dashboard/*` → Private authenticated routes
+  - `/public/*` → Public unauthenticated routes  
+  - `/*` → Default redirect to dashboard
 
 ### Directory Structure
 
