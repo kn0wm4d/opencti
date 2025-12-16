@@ -72,6 +72,8 @@ To help you get you familiar with our contribution process, we have a list of [b
 
 If you want to actively help OpenCTI, we created a [dedicated documentation](https://docs.opencti.io/latest/development/environment_ubuntu/) about the deployment of a development environment and how to start the source code modification.
 
+For developers working on the frontend, see the [Frontend Architecture Documentation](docs/frontend.md) which explains the HTML template, CSS framework, JavaScript libraries, and build tooling used in the project.
+
 ## Community
 
 ### Status & bugs
