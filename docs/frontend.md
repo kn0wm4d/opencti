@@ -40,6 +40,8 @@ The application uses a minimal HTML template located at `opencti-platform/openct
 - Responsive viewport configuration
 - Progressive Web App (PWA) manifest support
 
+**Note:** The HTML template shown above is an exact copy of the source file at the time of documentation. Some attributes may contain unusual characters (e.g., the meta description name uses Cyrillic characters) or incomplete values (e.g., empty base href) - these reflect the actual state of the source file.
+
 ## CSS Framework & Styling
 
 ### Primary Styling System
